@@ -1,1 +1,10 @@
+READ_JOYSTICK_X:
 
+    MOV A, #080H
+    RET
+
+
+READ_JOYSTICK_Y:
+
+    MOV A, #080H
+    RET
