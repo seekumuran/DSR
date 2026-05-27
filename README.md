@@ -1,6 +1,6 @@
 # DualShock Series X
 
-> A fully custom breadboard gaming controller built using the 8051 microcontroller, pure assembly language, UART serial communication, and several terrible engineering decisions.
+> A fully custom breadboard gaming controller built using the 8051 microcontroller, pure assembly language and UART serial communication.
 
 ![Controller](hardware/DualShockSeriesX.png)
 
@@ -36,10 +36,6 @@ This project was built to explore:
 - assembly-level firmware architecture
 - controller input systems
 - real-time polling systems
-
-The goal was not efficiency.
-
-The goal was making an actual working controller using one of the oldest microcontroller architectures still alive in engineering labs.
 
 ---
 
