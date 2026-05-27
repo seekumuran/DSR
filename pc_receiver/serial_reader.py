@@ -5,38 +5,65 @@ ser = serial.Serial(
     baudrate=9600
 )
 
-print("Controller Connected")
+print("DualShock Series X Connected")
 
 while True:
 
-    data = ser.read()
+    buttons1 = int.from_bytes(ser.read(), byteorder='big')
+    buttons2 = int.from_bytes(ser.read(), byteorder='big')
 
-    value = int.from_bytes(data, byteorder='big')
+    lx = int.from_bytes(ser.read(), byteorder='big')
+    ly = int.from_bytes(ser.read(), byteorder='big')
 
-    print("--------------------------------")
+    rx = int.from_bytes(ser.read(), byteorder='big')
+    ry = int.from_bytes(ser.read(), byteorder='big')
 
-    print("RAW:", bin(value))
+    print("----------------------------------")
 
-    if value & 0x01:
+    print("LEFT STICK :", lx, ly)
+    print("RIGHT STICK:", rx, ry)
+
+    if buttons1 & 0x01:
         print("UP")
 
-    if value & 0x02:
+    if buttons1 & 0x02:
         print("DOWN")
 
-    if value & 0x04:
+    if buttons1 & 0x04:
         print("LEFT")
 
-    if value & 0x08:
+    if buttons1 & 0x08:
         print("RIGHT")
 
-    if value & 0x10:
+    if buttons1 & 0x10:
         print("A")
 
-    if value & 0x20:
+    if buttons1 & 0x20:
         print("B")
 
-    if value & 0x40:
+    if buttons1 & 0x40:
         print("X")
 
-    if value & 0x80:
+    if buttons1 & 0x80:
         print("Y")
+
+    if buttons2 & 0x01:
+        print("L1")
+
+    if buttons2 & 0x02:
+        print("R1")
+
+    if buttons2 & 0x04:
+        print("L2")
+
+    if buttons2 & 0x08:
+        print("R2")
+
+    if buttons2 & 0x10:
+        print("START")
+
+    if buttons2 & 0x20:
+        print("SELECT")
+
+    if buttons2 & 0x40:
+        print("HOME")
