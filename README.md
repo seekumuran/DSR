@@ -56,8 +56,6 @@ The AT89S52 was selected because:
 - native UART support
 - extremely simple architecture
 - direct register-level access
-- huge educational value
-- absurdly funny choice for a controller
 
 ---
 
@@ -102,10 +100,6 @@ The controller supports:
 Each joystick outputs:
 - horizontal axis
 - vertical axis
-
-The 8051 does not contain an internal ADC.
-
-Because of this, external ADC hardware is required.
 
 ---
 
@@ -246,10 +240,6 @@ This initializes:
 ## `delay.asm`
 
 Implements software timing delays using nested decrement loops.
-
-No hardware timers are used for delays.
-
-Because using software loops felt more authentic.
 
 ---
 
