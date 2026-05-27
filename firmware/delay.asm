@@ -1,1 +1,12 @@
+DELAY:
 
+    MOV R7, #255
+
+DELAY1:
+    MOV R6, #255
+
+DELAY2:
+    DJNZ R6, DELAY2
+    DJNZ R7, DELAY1
+
+    RET
