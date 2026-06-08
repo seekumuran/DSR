@@ -1,0 +1,15 @@
+NAME MATRIX
+
+PUBLIC SCAN_MATRIX
+
+SCAN_MATRIX:
+
+    MOV A, P1
+
+    MOV 40H, A
+
+    MOV A, P2
+
+    MOV 41H, A
+
+    RET
