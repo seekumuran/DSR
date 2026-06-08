@@ -1,0 +1,35 @@
+NAME UART
+
+PUBLIC UART_INIT
+PUBLIC UART_SEND_PACKET
+
+UART_INIT:
+
+    MOV TMOD, #20H
+    MOV TH1, #0FDH
+
+    MOV SCON, #50H
+
+    SETB TR1
+
+    RET
+
+UART_SEND_PACKET:
+
+    MOV R0, #70H
+    MOV R1, #0BH
+
+SEND_LOOP:
+
+    MOV A, @R0
+    MOV SBUF, A
+
+WAIT_TX:
+    JNB TI, WAIT_TX
+
+    CLR TI
+
+    INC R0
+    DJNZ R1, SEND_LOOP
+
+    RET
