@@ -1,5 +1,3 @@
 @echo off
-
-python ../pc_receiver/serial_reader.py
-
+python ../middleware/packet_decoder/decoder.py
 pause
