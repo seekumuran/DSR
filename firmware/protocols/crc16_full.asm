@@ -1,0 +1,56 @@
+NAME CRC16_FULL
+
+PUBLIC CRC16_COMPUTE
+
+CRC_H DATA 60H
+CRC_L DATA 61H
+
+CRC16_COMPUTE:
+
+    MOV CRC_H, #0FFH
+    MOV CRC_L, #0FFH
+
+    MOV R0, #70H
+    MOV R1, #09H
+
+CRC_NEXT_BYTE:
+
+    MOV A, @R0
+
+    XRL CRC_L, A
+
+    MOV R7, #08H
+
+CRC_BIT_LOOP:
+
+    MOV A, CRC_L
+
+    RRC A
+
+    MOV CRC_L, A
+
+    MOV A, CRC_H
+
+    RRC A
+
+    MOV CRC_H, A
+
+    JNC CRC_SKIP
+
+    MOV A, CRC_H
+    XRL A, #0A0H
+    MOV CRC_H, A
+
+    MOV A, CRC_L
+    XRL A, #01H
+    MOV CRC_L, A
+
+CRC_SKIP:
+
+    DJNZ R7, CRC_BIT_LOOP
+
+    INC R0
+
+    DJNZ R1, CRC_NEXT_BYTE
+
+    RET
