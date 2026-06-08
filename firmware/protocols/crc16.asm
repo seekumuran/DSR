@@ -1,0 +1,38 @@
+NAME CRC16
+
+PUBLIC CRC16_INIT
+PUBLIC CRC16_UPDATE
+
+CRC_H DATA 60H
+CRC_L DATA 61H
+
+CRC16_INIT:
+
+    MOV CRC_H, #0FFH
+    MOV CRC_L, #0FFH
+
+    RET
+
+CRC16_UPDATE:
+
+    XRL CRC_L, A
+
+    MOV R7, #08H
+
+CRC_LOOP:
+
+    MOV A, CRC_L
+
+    RRC A
+
+    MOV CRC_L, A
+
+    MOV A, CRC_H
+
+    RRC A
+
+    MOV CRC_H, A
+
+    DJNZ R7, CRC_LOOP
+
+    RET
