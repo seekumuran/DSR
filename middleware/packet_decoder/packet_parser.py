@@ -1,4 +1,4 @@
-class KXIPPacket:
+class DSSXPacket:
 
     def __init__(self, raw):
 
