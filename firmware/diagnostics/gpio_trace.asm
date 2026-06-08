@@ -1,0 +1,13 @@
+NAME GPIO_TRACE
+
+PUBLIC TRACE_GPIO
+
+TRACE_GPIO:
+
+    MOV A, P1
+    MOV 68H, A
+
+    MOV A, P2
+    MOV 69H, A
+
+    RET
