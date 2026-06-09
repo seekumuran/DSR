@@ -1,0 +1,15 @@
+# DSSX Packet
+
+```txt
+SYNC
+VERSION
+DEVICE
+BUTTONS_1
+BUTTONS_2
+LX
+LY
+RX
+RY
+CRC_H
+CRC_L
+```
