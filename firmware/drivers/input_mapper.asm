@@ -1,0 +1,15 @@
+NAME INPUT_MAPPER
+
+PUBLIC MAP_INPUTS
+
+MAP_INPUTS:
+
+    MOV A, P1
+
+    MOV 5BH, A
+
+    MOV A, P2
+
+    MOV 5CH, A
+
+    RET
