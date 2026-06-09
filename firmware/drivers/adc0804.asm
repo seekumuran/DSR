@@ -1,0 +1,17 @@
+NAME ADC0804
+
+PUBLIC ADC_READ
+
+ADC_READ:
+
+    CLR P3.7
+
+WAIT_ADC:
+
+    JB P3.2, WAIT_ADC
+
+    MOV A, P1
+
+    SETB P3.7
+
+    RET
