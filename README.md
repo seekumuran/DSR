@@ -1136,26 +1136,6 @@ A more detailed discussion is in `docs/tradeoffs.md`. Key tradeoffs summarized h
 
 ---
 
-## Future Roadmap
-
-These are tracked in `docs/roadmap.md`. High-level items:
-
-- **Dual-link support**: Allow two controller devices on separate UART ports to be multiplexed through a single middleware instance. This requires extending the packet type space with a device ID field — a breaking protocol change.
-
-- **DSSX v2 protocol**: Address the 255-byte payload limit properly (2-byte length field, extended type space), add an optional encryption layer for hostile environments, and formalize the fragmentation protocol.
-
-- **FPGA → RISC-V soft core**: Replace the 8051 with a RISC-V soft core on a larger FPGA for development and simulation. The 8051 remains the target for physical hardware; the RISC-V core provides a more comfortable development environment with better toolchain support.
-
-- **Bluetooth transport**: Add a BLE transport option. This requires a protocol adaptation layer (BLE's ATT/GATT is very different from a UART stream) and careful latency management. Not a near-term priority.
-
-- **Calibration persistence**: Currently calibration data is lost on firmware reset. Adding a small amount of non-volatile storage (a 25LC040 SPI EEPROM is on the tentative BOM) for calibration persistence and boot configuration.
-
-- **Formal verification of recovery protocol**: The recovery state machine is complex enough that informal testing may miss edge cases. Using TLA+ or SPIN to formally verify the protocol state machine is a long-term goal.
-
-- **Host driver for lower latency**: The uinput/ViGEm approach introduces HID stack latency. A kernel driver or eBPF-based shortcut to the input subsystem would reduce this. Requires careful platform-specific work.
-
----
-
 ## Engineering Notes
 
 Notes that don't fit cleanly elsewhere:
@@ -1171,16 +1151,3 @@ Notes that don't fit cleanly elsewhere:
 **On testing**: The test suite is in `tests/` (not shown in the top-level layout above — it's there). Unit tests use `cmocka` (for C) and Cargo's built-in test framework (for Rust). Integration tests use the Python SDK and the simulated transport. The CI pipeline runs unit tests, integration tests, and a short fuzzer run on every commit.
 
 ---
-
-## License
-
-This project is available under the MIT License. See `LICENSE` for details.
-
-Third-party components:
-- 8051 emulator core: derived from `emu8051` (MIT)
-- CRC-16 CCITT implementation: public domain
-- Verilog FIFO template: derived from FPGA4FUN examples (permissive license, see `fpga/fifo/LICENSE`)
-
----
-
-*This README is accurate as of the most recent commit. For implementation details on specific subsystems, refer to the documentation in `docs/` and the inline comments in source files. Architecture Decision Records (`docs/adr/`) document significant decisions and their alternatives considered.*
