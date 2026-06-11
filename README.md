@@ -176,32 +176,32 @@ dual-shock-series-x/
 The platform is layered. Each layer has a defined responsibility and communicates with adjacent layers through explicit interfaces. Cross-layer shortcuts exist in a few places (mostly in the diagnostics path) and they are marked as technical debt in `docs/adr/`.
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                        HOST SOFTWARE                        │
-│                                                             │
-│   ┌───────────┐  ┌───────────┐  ┌──────────┐  ┌─────────┐   │
-│   │  SDK      │  │   HID     │  │ Diag     │  │  Bench  │   │
-│   │(C/C++/    │  │Translation│  │ Dashboard│  │  Suite  │   │
-│   │ Py/Rust)  │  │           │  │          │  │         │   │
-│   └─────┬─────┘  └─────┬─────┘  └────┬─────┘  └────┬────┘   │
-│         │              │             │              │       │
-│   ┌─────▼──────────────▼─────────────▼──────────────▼─────┐ │
-│   │                 MIDDLEWARE RUNTIME                    │ │
-│   │   Packet Router │ Stream Scheduler │ Transport Layer  │ │
-│   └──────────────────────────┬────────────────────────────┘ │ 
-└─────────────────────────────┼───────────────────────────────┘
+┌─────────────────────────────────────────────────────────────-┐
+│                        HOST SOFTWARE                         │
+│                                                              │
+│   ┌───────────┐  ┌───────────┐  ┌──────────┐  ┌─────────┐    │
+│   │  SDK      │  │   HID     │  │ Diag     │  │  Bench  │    │
+│   │(C/C++/    │  │Translation│  │ Dashboard│  │  Suite  │    │
+│   │ Py/Rust)  │  │           │  │          │  │         │    │
+│   └─────┬─────┘  └─────┬─────┘  └────┬─────┘  └────┬────┘    │
+│         │              │             │              │        │
+│   ┌─────▼──────────────▼─────────────▼──────────────▼─────┐  │
+│   │                 MIDDLEWARE RUNTIME                    │  │
+│   │   Packet Router │ Stream Scheduler │ Transport Layer  │  │
+│   └──────────────────────────┬────────────────────────────┘  │ 
+└─────────────────────────────-┼───────────────────────────────┘
                                │  UART (physical or emulated)
-┌─────────────────────────────┼───────────────────────────────┐
-│                    FPGA BOUNDARY                            │
-│                             │                               │
-│   ┌─────────┐  ┌─────────┐  │  ┌──────────┐  ┌──────────┐   │
-│   │  UART   │  │  FIFO   │◄─┘  │   CRC    │  │   PWM    │   │
-│   │ RX/TX   │  │ Buffer  │     │  Engine  │  │  Engine  │   │
-│   └────┬────┘  └────┬────┘     └────┬─────┘  └────┬─────┘   │
-│        └────────────┴──────────────┴──────────────┘         │
-│                             │                               │
-└─────────────────────────────┼───────────────────────────────┘
-                               │  Internal bus (SFR-mapped)
+┌─────────────────────────────-┼───────────────────────────────┐
+│                    FPGA BOUNDARY                             │
+│                             │                                │
+│   ┌─────────┐  ┌─────────┐  │  ┌──────────┐  ┌──────────┐    │
+│   │  UART   │  │  FIFO   │◄─┘  │   CRC    │  │   PWM    │    │
+│   │ RX/TX   │  │ Buffer  │     │  Engine  │  │  Engine  │    │
+│   └────┬────┘  └────┬────┘     └────┬─────┘  └────┬─────┘    │
+│        └────────────┴──────────────┴──────────────┘          │
+│                             │                                │
+└─────────────────────────────┼───────────────────────────────-┘
+                              │  Internal bus (SFR-mapped)
 ┌─────────────────────────────┼───────────────────────────────┐
 │                    8051 FIRMWARE                            │
 │                             │                               │
@@ -214,10 +214,10 @@ The platform is layered. Each layer has a defined responsibility and communicate
 │  └──────────┘  └────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────┘
                                │
-┌─────────────────────────────┼───────────────────────────────┐
-│                    HARDWARE                                 │
-│  Dual analog sticks │ Haptic motors │ Buttons │ Power rail  │
-└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────-┼───────────────────────────────┐
+│                    HARDWARE                                  │
+│  Dual analog sticks │ Haptic motors │ Buttons │ Power rail   │
+└──────────────────────────────-───────────────────────────────┘
 ```
 
 Data flows upward from physical hardware through the 8051 firmware, across the FPGA boundary (which handles buffering and compute-intensive framing work), over UART to the host middleware, and finally up to the SDK or HID layer. Control flows downward: host sends configuration, haptic commands, and calibration data back into the firmware.
